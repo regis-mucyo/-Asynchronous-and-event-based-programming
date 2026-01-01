@@ -29,3 +29,13 @@ var p = new Promise((resolve, reject) => {
   .then((error) => console.log(error));
 
 // What will the output be for the above code
+
+// Question 4 : Handling Errors
+
+var p = new Promise((resolve, reject) => {
+  reject(Error("The Fails!"));
+})
+  .catch((error) => console.log(error.message))
+  .catch((error) => console.log(error.message));
+
+// What will the output be for the above code
