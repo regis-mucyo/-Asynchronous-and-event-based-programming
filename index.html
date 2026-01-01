@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Digital o'Clock</title>
+  </head>
+  <body>
+    <div class="mt-40 bg-orange-400 mx-96 rounded-md p-10">
+      <p id="page" class="text-8xl text-center text-indigo-500"></p>
+    </div>
+  </body>
+  <script>
+    const page = document.getElementById("page");
+    setInterval(function time() {
+      let date = new Date();
+      page.innerHTML = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    }, 1000);
+  </script>
+</html>
