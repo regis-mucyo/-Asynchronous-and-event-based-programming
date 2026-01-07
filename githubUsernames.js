@@ -1,4 +1,3 @@
-//   https://api.github.com/users/USERNAME
 const fetchGitHubName = async (username) => {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`);
