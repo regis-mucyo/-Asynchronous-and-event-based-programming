@@ -1,17 +1,26 @@
-const getData = async (url, times) => {
-  try {
-    let response = await fetch(url);
-    let result = await response.json();
-    if (!response.ok) {
-      throw new Error(response.status);
-    } else {
-      console.log(result[0]);
-    }
-  } catch (err) {
-    for (let i = 1; i <= times; i++) {
-      console.log("Not Found");
+// Write a JavaScript function that fetches data from an API and retries the request a specified number of times if it fails
+async function getData(url, times) {
+  let retries = 0;
+
+  while (retries < times) {
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      retries++;
+      console.log(`Request failed. Retrying (${retries}/${times})...`);
+
+      if (retries === times) {
+        console.log(`Failed after ${times} retries: ${error.message}`);
+      }
     }
   }
-};
+}
 
-getData("https://jsonplaceholder.typicode.com/post", 3);
+getData(`https://jsonplaceholder.typicode.com/posts`, 3);
