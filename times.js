@@ -1,26 +1,20 @@
-// Write a JavaScript function that fetches data from an API and retries the request a specified number of times if it fails
-async function getData(url, times) {
+const getData = async (url, times) => {
   let retries = 0;
-
   while (retries < times) {
     try {
-      const response = await fetch(url);
-
+      let response = await fetch(url);
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`something went wrong! ${response.status}`);
       }
-
-      const result = await response.json();
+      let result = await response.json();
       console.log(result);
     } catch (error) {
       retries++;
-      console.log(`Request failed. Retrying (${retries}/${times})...`);
-
+      console.log(`The system retry ${retries}/${times}`);
       if (retries === times) {
-        console.log(`Failed after ${times} retries: ${error.message}`);
+        console.log(`The all ${times} retries are failed, ${error.message}`);
       }
     }
   }
-}
-
-getData(`https://jsonplaceholder.typicode.com/posts`, 3);
+};
+getData("https://jsonplaceholder.code.com/post", 3);
