@@ -1,6 +1,8 @@
 const fetchGitHubName = async (username) => {
+  const controller = new AbortController();
+  const signal = controller.signal;
   try {
-    const response = await fetch(`https://api.github.com/users/${username}`);
+    const response = await fetch(`https://api.github.com/users/${username}`,{signal});
     const result = await response.json();
     if (!response.ok) {
       console.log(null);
